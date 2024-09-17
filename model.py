@@ -1,12 +1,16 @@
 from flask import Flask, render_template, request
 import numpy as np
 import pickle
-import joblib 
+import os
+
 app = Flask(__name__)
 
 # Load the pre-trained model and the scaler
-model = pickle.load(open('random_forest_model.pkl', 'rb'))
-scaler = pickle.load(open('scaler.pkl', 'rb'))
+model_path = os.getenv('MODEL_PATH', 'random_forest_model.pkl')
+scaler_path = os.getenv('SCALER_PATH', 'scaler.pkl')
+
+model = pickle.load(open(model_path, 'rb'))
+scaler = pickle.load(open(scaler_path, 'rb'))
 
 @app.route('/')
 def index():
@@ -53,4 +57,5 @@ def predict():
         return render_template('index.html', error=str(e))
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    port = int(os.environ.get('PORT', 5000))
+    app.run(host='0.0.0.0', port=port, debug=True)
