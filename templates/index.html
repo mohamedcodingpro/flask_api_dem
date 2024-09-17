@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dementia Prediction</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <h1>Dementia Prediction Model</h1>
+        <form action="/predict" method="POST">
+            <label for="age">Age:</label>
+            <input type="number" id="age" name="age" required>
+
+            <label for="sex">Sex:</label>
+            <select id="sex" name="sex" required>
+                <option value="M">Male</option>
+                <option value="F">Female</option>
+            </select>
+
+            <label for="education">Education Level:</label>
+            <input type="number" id="education" name="education" required>
+
+            <label for="memory_score">Memory Score:</label>
+            <input type="number" id="memory_score" name="memory_score" required>
+
+            <label for="language_score">Language Score:</label>
+            <input type="number" id="language_score" name="language_score" required>
+
+            <label for="visual_score">Visual Score:</label>
+            <input type="number" id="visual_score" name="visual_score" required>
+
+            <label for="executive_score">Executive Score:</label>
+            <input type="number" id="executive_score" name="executive_score" required>
+
+            <label for="attention_score">Attention Score:</label>
+            <input type="number" id="attention_score" name="attention_score" required>
+
+            <label for="orientation_score">Orientation Score:</label>
+            <input type="number" id="orientation_score" name="orientation_score" required>
+
+            <label for="abstract_thinking">Abstract Thinking:</label>
+            <input type="number" id="abstract_thinking" name="abstract_thinking" required>
+
+            <label for="calculation_ability">Calculation Ability:</label>
+            <input type="number" id="calculation_ability" name="calculation_ability" required>
+
+            <label for="judgement_score">Judgement Score:</label>
+            <input type="number" id="judgement_score" name="judgement_score" required>
+
+            <button type="submit">Predict</button>
+        </form>
+
+        <!-- Display prediction result -->
+        {% if prediction %}
+        <div class="result">
+            <p>Prediction: {{ prediction }}</p>
+        </div>
+        {% endif %}
+
+        <!-- Display error message -->
+        {% if error %}
+        <div class="error">
+            <p>Error: {{ error }}</p>
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>
